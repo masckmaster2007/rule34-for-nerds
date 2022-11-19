@@ -12,6 +12,12 @@ if(!empty($_POST['keyword'])){
         }else{
             $json = file_get_contents("https://api.rule34.xxx/index.php?page=dapi&s=post&q=index&tags=$keyword&json=1");
             }
+            if(empty($json)){
+                exit("No results");
+            }
+            if(isset($_POST['sm'])){
+            $json = str_replace("rule34.xxx", "redacted.tld", $json);
+            }
         if(strpos($_SERVER['HTTP_USER_AGENT'], 'Firefox') !== FALSE){
             header('Content-Type: application/json');
             echo $json;
@@ -32,6 +38,9 @@ $betterkw = str_replace("%20","-",$keyword);
 if(!empty($_POST['page'])){
     $page = $_POST['page'];
 $json = file_get_contents("https://api.rule34.xxx/index.php?page=dapi&s=post&q=index&tags=$keyword&pid=$page&json=1");
+if($json == "[]"){
+    exit("No results");
+}
 $myfile = fopen("$betterkw-p$page.json", "w") or die("Unable to open file!");
 $txt = $json;
 fwrite($myfile, $txt);
@@ -41,6 +50,10 @@ echo "🦃";
 exit;
 } else {
 $json = file_get_contents("https://api.rule34.xxx/index.php?page=dapi&s=post&q=index&tags=$keyword&json=1");
+if($json == "[]"){
+    echo("No results");
+    exit;
+}
 $myfile = fopen("$betterkw.json", "w") or die("Unable to open file!");
 $txt = $json;
 fwrite($myfile, $txt);
