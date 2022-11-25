@@ -12,7 +12,7 @@ background-color: black;
     <form action="ruledump.php" method="post" id="form1">
     Keyword: <input type="text" name="keyword"><br>
     Page (optional): <input type="text" name="page"><br>
-    <input type="checkbox" name="sm" value="Safe Mode">Safe Mode (links don't work)</input><br>
+    <input type="checkbox" name="sm" value="Safe Mode" checked="true">Safe Mode (links don't work)</input><br>
     <input type="checkbox" name="whoasked" value="Permalink the JSON xD">Permalink the JSON xD</input><br>
     <input type="submit" value="Get the JSON" form="form1" /></center><br>
 </form>
